@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:infugion_ui/screens/change_page.dart';
 
 class HomePage extends StatefulWidget {
+  static const routeName = '/home';
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -71,6 +71,14 @@ class _HomePageState extends State<HomePage> {
       'Genral Knowledge',
       'Social Science'
     ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final route = ModalRoute.of(context);
+    if (route == null) return SizedBox.shrink();
+    final routeArgs = route.settings.arguments as Map<String, List<double>>;
+    result = routeArgs['data'] as List<double>;
     _chartData = [
       createData(1, result[0]),
       createData(2, result[1]),
@@ -78,10 +86,6 @@ class _HomePageState extends State<HomePage> {
       createData(4, result[3]),
       createData(5, result[4]),
     ];
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -122,130 +126,138 @@ class _HomePageState extends State<HomePage> {
   //WIDGET BUILDS
   Widget barChart() {
     return Card(
+      elevation: 6,
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: Colors.white70, width: 1),
-        borderRadius: BorderRadius.circular(25),
+        borderRadius: BorderRadius.circular(25.0),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            padding: MediaQuery.of(context).orientation == Orientation.portrait
-                ? EdgeInsets.symmetric(horizontal: 22, vertical: 20)
-                : EdgeInsets.symmetric(horizontal: 28, vertical: 5),
-            alignment: Alignment.topLeft,
-            child: Text(
-              'Results',
-              style: TextStyle(
-                color: Colors.blueAccent,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
+      child: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              padding:
+                  MediaQuery.of(context).orientation == Orientation.portrait
+                      ? EdgeInsets.symmetric(horizontal: 22, vertical: 20)
+                      : EdgeInsets.symmetric(horizontal: 28, vertical: 5),
+              alignment: Alignment.topLeft,
+              child: Text(
+                'Results',
+                style: TextStyle(
+                  color: Colors.blueAccent,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ),
-          Container(
-            padding: EdgeInsets.fromLTRB(35, 10, 22, 5),
-            color: Colors.white,
-            height: MediaQuery.of(context).size.height * 0.35,
-            width: double.infinity,
-            child: BarChart(
-              BarChartData(
-                maxY: 100,
-                minY: 0,
-                titlesData: FlTitlesData(
-                  leftTitles: SideTitles(
-                      showTitles: true,
+            Container(
+              padding: EdgeInsets.fromLTRB(35, 10, 22, 15),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(25.0),
+                ),
+              ),
+              height: MediaQuery.of(context).size.height * 0.35,
+              width: double.infinity,
+              child: BarChart(
+                BarChartData(
+                  maxY: 100,
+                  minY: 0,
+                  titlesData: FlTitlesData(
+                    leftTitles: SideTitles(
+                        showTitles: true,
+                        getTextStyles: (value) => const TextStyle(
+                              color: Color(0xff7589a2),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                        margin: 20,
+                        reservedSize: 14,
+                        getTitles: MediaQuery.of(context).orientation ==
+                                Orientation.portrait
+                            ? (value) {
+                                if (value == 0) {
+                                  return '0';
+                                } else if (value == 10) {
+                                  return '10';
+                                } else if (value == 20) {
+                                  return '20';
+                                } else if (value == 30) {
+                                  return '30';
+                                } else if (value == 40) {
+                                  return '40';
+                                } else if (value == 50) {
+                                  return '50';
+                                } else if (value == 60) {
+                                  return '60';
+                                } else if (value == 70) {
+                                  return '70';
+                                } else if (value == 80) {
+                                  return '80';
+                                } else if (value == 90) {
+                                  return '90';
+                                } else if (value == 100) {
+                                  return '100';
+                                } else {
+                                  return '';
+                                }
+                              }
+                            : (value) {
+                                if (value == 0) {
+                                  return '0';
+                                } else if (value == 20) {
+                                  return '20';
+                                } else if (value == 40) {
+                                  return '40';
+                                } else if (value == 60) {
+                                  return '60';
+                                } else if (value == 80) {
+                                  return '80';
+                                } else if (value == 100) {
+                                  return '100';
+                                } else {
+                                  return '';
+                                }
+                              }),
+                    bottomTitles: SideTitles(
                       getTextStyles: (value) => const TextStyle(
-                            color: Color(0xff7589a2),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14,
-                          ),
-                      margin: 20,
-                      reservedSize: 14,
-                      getTitles: MediaQuery.of(context).orientation ==
-                              Orientation.portrait
-                          ? (value) {
-                              if (value == 0) {
-                                return '0';
-                              } else if (value == 10) {
-                                return '10';
-                              } else if (value == 20) {
-                                return '20';
-                              } else if (value == 30) {
-                                return '30';
-                              } else if (value == 40) {
-                                return '40';
-                              } else if (value == 50) {
-                                return '50';
-                              } else if (value == 60) {
-                                return '60';
-                              } else if (value == 70) {
-                                return '70';
-                              } else if (value == 80) {
-                                return '80';
-                              } else if (value == 90) {
-                                return '90';
-                              } else if (value == 100) {
-                                return '100';
-                              } else {
-                                return '';
-                              }
-                            }
-                          : (value) {
-                              if (value == 0) {
-                                return '0';
-                              } else if (value == 20) {
-                                return '20';
-                              } else if (value == 40) {
-                                return '40';
-                              } else if (value == 60) {
-                                return '60';
-                              } else if (value == 80) {
-                                return '80';
-                              } else if (value == 100) {
-                                return '100';
-                              } else {
-                                return '';
-                              }
-                            }),
-                  bottomTitles: SideTitles(
-                    getTextStyles: (value) => const TextStyle(
-                      color: Color(0xff7589a2),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
+                        color: Color(0xff7589a2),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                      showTitles: true,
+                      getTitles: (double value) {
+                        switch (value.toInt()) {
+                          case 1:
+                            return 'Eng';
+                          case 2:
+                            return 'CS';
+                          case 3:
+                            return 'Sci';
+                          case 4:
+                            return 'GK';
+                          case 5:
+                            return 'So.Sci';
+                          default:
+                            return 'Unknown';
+                        }
+                      },
                     ),
-                    showTitles: true,
-                    getTitles: (double value) {
-                      switch (value.toInt()) {
-                        case 1:
-                          return 'Eng';
-                        case 2:
-                          return 'CS';
-                        case 3:
-                          return 'Sci';
-                        case 4:
-                          return 'GK';
-                        case 5:
-                          return 'So.Sci';
-                        default:
-                          return 'Unknown';
-                      }
-                    },
                   ),
-                ),
-                borderData: FlBorderData(
-                  border: Border(
-                    top: BorderSide.none,
-                    right: BorderSide.none,
-                    left: BorderSide.none,
-                    bottom: BorderSide.none,
+                  borderData: FlBorderData(
+                    border: Border(
+                      top: BorderSide.none,
+                      right: BorderSide.none,
+                      left: BorderSide.none,
+                      bottom: BorderSide.none,
+                    ),
                   ),
+                  barGroups: _chartData,
                 ),
-                barGroups: _chartData,
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -263,22 +275,22 @@ class _HomePageState extends State<HomePage> {
           vertical: 10.0,
         ),
         child: InkWell(
-          onTap: () async {
-            result = await Navigator.of(context).pushNamed(ChangePage.routeName)
-                as List<double>;
-            print(result);
-            setState(() {
-              _chartData = [
-                createData(1, result[0]),
-                createData(2, result[1]),
-                createData(3, result[2]),
-                createData(4, result[3]),
-                createData(5, result[4]),
-              ];
-            });
-          },
+          // onTap: () async {
+          //   result = await Navigator.of(context).pushNamed(ChangePage.routeName)
+          //       as List<double>;
+          //   print(result);
+          //   setState(() {
+          //     _chartData = [
+          //       createData(1, result[0]),
+          //       createData(2, result[1]),
+          //       createData(3, result[2]),
+          //       createData(4, result[3]),
+          //       createData(5, result[4]),
+          //     ];
+          //   });
+          // },
           child: Text(
-            'Change Graph Data',
+            'View More',
             style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
@@ -346,7 +358,9 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             icon: Icon(
               Icons.arrow_back_ios,
               color: Colors.white,

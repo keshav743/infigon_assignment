@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:infugion_ui/screens/home_page.dart';
 
 class ChangePage extends StatefulWidget {
   static const routeName = '/change';
@@ -96,13 +97,19 @@ class _ChangePageState extends State<ChangePage> {
                         print('Invalid');
                         return;
                       }
-                      Navigator.of(context).pop([
+                      var data = [
                         double.parse(_engController.text),
                         double.parse(_csController.text),
                         double.parse(_sciController.text),
                         double.parse(_gkController.text),
                         double.parse(_socController.text),
-                      ]);
+                      ];
+                      Navigator.of(context).pushNamed(
+                        HomePage.routeName,
+                        arguments: {
+                          'data': data,
+                        },
+                      );
                     },
                     child: Text('Save and Load'),
                   ),
@@ -130,18 +137,18 @@ class _ChangePageState extends State<ChangePage> {
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: Colors.white,
-              size: 26.0,
-            ),
-          ),
+          // IconButton(
+          //   onPressed: () {
+          //     Navigator.of(context).pop();
+          //   },
+          //   icon: Icon(
+          //     Icons.arrow_back_ios,
+          //     color: Colors.white,
+          //     size: 26.0,
+          //   ),
+          // ),
           Text(
             'Subject Analyser',
             style: TextStyle(

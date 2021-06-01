@@ -14,8 +14,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       routes: {
         ChangePage.routeName: (ctx) => ChangePage(),
+        HomePage.routeName: (ctx) => HomePage(),
       },
-      home: HomePage(),
+      home: ChangePage(),
     );
   }
 }
