@@ -131,7 +131,7 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           Container(
             padding: MediaQuery.of(context).orientation == Orientation.portrait
-                ? EdgeInsets.symmetric(horizontal: 28, vertical: 20)
+                ? EdgeInsets.symmetric(horizontal: 22, vertical: 20)
                 : EdgeInsets.symmetric(horizontal: 28, vertical: 5),
             alignment: Alignment.topLeft,
             child: Text(
@@ -144,7 +144,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Container(
-            padding: EdgeInsets.fromLTRB(12, 10, 30, 5),
+            padding: EdgeInsets.fromLTRB(35, 10, 22, 5),
             color: Colors.white,
             height: MediaQuery.of(context).size.height * 0.35,
             width: double.infinity,
@@ -278,7 +278,7 @@ class _HomePageState extends State<HomePage> {
             });
           },
           child: Text(
-            'View More',
+            'Change Graph Data',
             style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
