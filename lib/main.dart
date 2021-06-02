@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
         HomePage.routeName: (ctx) => HomePage(),
       },
       home: ChangePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

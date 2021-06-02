@@ -94,7 +94,30 @@ class _ChangePageState extends State<ChangePage> {
                           _sciController.text.trim().isEmpty ||
                           _gkController.text.trim().isEmpty ||
                           _socController.text.trim().isEmpty) {
-                        print('Invalid');
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Please fill all values..'),
+                          ),
+                        );
+                        return;
+                      }
+                      if ((double.parse(_engController.text) > 100 ||
+                              double.parse(_engController.text) < 0) ||
+                          (double.parse(_csController.text) > 100 ||
+                              double.parse(_csController.text) < 0) ||
+                          (double.parse(_sciController.text) > 100 ||
+                              double.parse(_sciController.text) < 0) ||
+                          (double.parse(_gkController.text) > 100 ||
+                              double.parse(_gkController.text) < 0) ||
+                          (double.parse(_socController.text) > 100 ||
+                              double.parse(_socController.text) < 0)) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content:
+                                Text('All Values should be between 0 and 100'),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
                         return;
                       }
                       var data = [
